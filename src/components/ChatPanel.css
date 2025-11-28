@@ -1,0 +1,161 @@
+/* CONTENEDOR PRINCIPAL */
+.chat-panel-container {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  z-index: 2000; /* Encima de todo */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* HEADER */
+.chat-header {
+  height: 50px;
+  padding-top: env(safe-area-inset-top);
+  height: calc(50px + env(safe-area-inset-top));
+  border-bottom: 1px solid #e3e5e8;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  background: #f2f3f5; /* Gris tipo Discord */
+  flex-shrink: 0;
+}
+
+.chat-back-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #5865f2; /* Color Blurple Discord */
+  margin-right: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.chat-title {
+  font-weight: 700;
+  font-size: 16px;
+  color: #060607;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hashtag {
+  color: #6d6f78;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+/* AREA DE MENSAJES */
+.chat-messages-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  padding-bottom: 20px;
+  
+  /* TRUCO DISCORD: Flexbox columna + justificar al final */
+  /* Esto hace que los mensajes nazcan pegados al input */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; 
+  
+  gap: 4px; /* Espacio pequeño entre mensajes compactos */
+  background-color: #ffffff;
+}
+
+/* IMPORTANTE: Asegurar que el primer mensaje (el más viejo) no se rompa */
+.chat-messages-area > :first-child {
+  margin-top: auto; 
+}
+
+/* FILA DE MENSAJE */
+.message-row {
+  margin-top: 12px; /* Espacio normal entre diferentes usuarios */
+  word-wrap: break-word;
+}
+
+.message-row.compact {
+  margin-top: 2px; /* Menos espacio si es el mismo usuario */
+}
+
+.message-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.message-username {
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+}
+.message-username:hover {
+  text-decoration: underline;
+}
+
+.message-time {
+  font-size: 11px;
+  color: #72767d;
+  font-weight: 500;
+}
+
+.message-content {
+  font-size: 15px;
+  color: #2e3338;
+  line-height: 1.4;
+}
+
+/* INPUT AREA */
+.chat-input-area {
+  background-color: #f2f3f5; /* Fondo gris input */
+  padding: 12px 16px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  border-top: 1px solid #e3e5e8;
+  flex-shrink: 0;
+}
+
+.input-wrapper {
+  background: #ebedef;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.input-wrapper:focus-within {
+  border-color: #5865f2; /* Borde azul al escribir */
+  background: #ffffff;
+}
+
+.input-wrapper input {
+  flex: 1;
+  height: 44px;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  color: #060607;
+  outline: none;
+}
+
+.send-btn {
+  background: none;
+  border: none;
+  color: #5865f2;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.send-btn:disabled {
+  color: #b9bbbe;
+  cursor: default;
+}

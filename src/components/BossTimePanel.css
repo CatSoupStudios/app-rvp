@@ -1,0 +1,155 @@
+/* CONTENEDOR PRINCIPAL SIN PADDING EXTRA */
+.ios-main-nopadding {
+  flex: 1;
+  padding: 10px 0; /* Solo padding vertical pequeño */
+  overflow-y: auto;
+  padding-bottom: 80px;
+}
+
+/* MENSAJE VACÍO */
+.empty-state {
+  text-align: center;
+  color: #8e8e93;
+  margin-top: 50px;
+  font-size: 15px;
+}
+
+/* CONTENEDOR DE LA LISTA */
+.workers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Un poco menos de espacio entre tarjetas */
+  padding: 0 1px; /* Padding lateral reducido (antes era 25px o más implícito) */
+  padding-bottom: 100px;
+}
+
+/* TARJETA DE EMPLEADO */
+.worker-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px; /* Padding interno más compacto */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); /* Sombra más sutil estilo iOS moderno */
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.2s ease;
+}
+
+.worker-card:active {
+  transform: scale(0.98);
+}
+
+/* CABECERA */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.worker-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* AVATAR */
+.worker-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.worker-avatar.active {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 2px solid #4caf50;
+}
+
+.worker-avatar.inactive {
+  background-color: #f2f2f7;
+  color: #8e8e93;
+  border: 2px solid transparent;
+}
+
+/* TEXTOS */
+.worker-info h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1c1c1e;
+  letter-spacing: -0.3px;
+}
+
+.status-text {
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 2px;
+  display: block;
+}
+
+.status-text.active {
+  color: #34c759;
+}
+
+.status-text.inactive {
+  color: #8e8e93;
+}
+
+/* BADGE SALARIO */
+.pay-badge {
+  background-color: #f2f2f7;
+  color: #636366;
+  padding: 5px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* DIVISOR */
+.card-divider {
+  border: none;
+  height: 1px;
+  background-color: #f2f2f7;
+  margin: 0;
+}
+
+/* ESTADÍSTICAS */
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.stat-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #8e8e93;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1c1c1e;
+  letter-spacing: -0.5px;
+}
+
+.stat-value.money {
+  color: #34c759;
+}
