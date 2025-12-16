@@ -1,0 +1,273 @@
+/* VARIABLES */
+:root {
+  --btp-card-bg: #FFFFFF;
+  --btp-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  --btp-shadow-hover: 0 12px 32px rgba(0,0,0,0.1);
+  --btp-accent-green: #34C759;
+  --btp-bg-active: linear-gradient(135deg, #f9fffb 0%, #ffffff 100%);
+}
+
+/* CONTENEDOR PRINCIPAL */
+.btp-container {
+  padding-top: 10px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* LOADING & ERROR */
+.btp-loading-container {
+  display: flex; justify-content: center; padding: 60px;
+}
+.btp-spinner {
+  width: 30px; height: 30px; border: 3px solid #e1e1e1;
+  border-top-color: #000; border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+.btp-error-container {
+  text-align: center; color: #ff3b30; padding: 40px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.error-icon { font-size: 40px; opacity: 0.8; }
+
+.btp-empty {
+  text-align: center; color: #999; margin-top: 60px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.btp-empty ion-icon { font-size: 40px; opacity: 0.3; }
+
+/* LISTA DE TARJETAS */
+.btp-list {
+  display: flex; flex-direction: column; gap: 16px;
+}
+
+/* --- TARJETA MAESTRA --- */
+.btp-card {
+  background: var(--btp-card-bg);
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: var(--btp-shadow);
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid rgba(0,0,0,0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Estado Activo: Sutil toque verde de fondo y borde */
+.btp-card.is-active {
+  background: var(--btp-bg-active);
+  border: 1px solid rgba(52, 199, 89, 0.15);
+  box-shadow: 0 10px 30px rgba(52, 199, 89, 0.08);
+}
+
+.btp-card:active { transform: scale(0.98); }
+
+/* CABECERA DE LA TARJETA */
+.btp-card-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 20px;
+}
+
+.btp-user-row { display: flex; align-items: center; gap: 14px; }
+
+/* Avatar Mejorado */
+.btp-avatar {
+  width: 48px; height: 48px;
+  background: #f2f2f7;
+  color: #1c1c1e;
+  border-radius: 16px; /* Squircle moderno */
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 700;
+  position: relative;
+}
+.btp-card.is-active .btp-avatar {
+  background: #1c1c1e; color: #fff; /* Invertido si está activo para destacar */
+}
+
+/* Punto Pulsante */
+.btp-status-dot {
+  position: absolute; top: -2px; right: -2px;
+  width: 12px; height: 12px;
+  background: #34C759;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.7);
+}
+.pulse { animation: pulse-green 2s infinite; }
+
+.btp-info h3 {
+  margin: 0; font-size: 17px; font-weight: 700; color: #1c1c1e; letter-spacing: -0.5px;
+}
+
+.btp-role-badge {
+  font-size: 12px; font-weight: 600; color: #8e8e93;
+  background: #f5f5f7; padding: 2px 8px; border-radius: 6px;
+  margin-top: 4px; display: inline-block;
+}
+
+/* Badge de Estado */
+.btp-status-badge {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  padding: 6px 10px; border-radius: 20px;
+}
+.btp-status-badge.active { background: rgba(52, 199, 89, 0.1); color: #34C759; }
+.btp-status-badge.inactive { background: #f2f2f7; color: #8e8e93; }
+
+/* GRID DE ESTADÍSTICAS (Estilo Bento Mini) */
+.btp-stats-grid {
+  display: flex; gap: 12px;
+}
+
+.btp-stat-box {
+  flex: 1;
+  background: #F9F9F9;
+  border-radius: 14px;
+  padding: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+
+.btp-stat-box.highlight {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.btp-stat-icon {
+  width: 32px; height: 32px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.btp-stat-icon.grey { background: #e5e5ea; color: #555; }
+.btp-stat-icon.green { background: rgba(52, 199, 89, 0.15); color: #2a8f40; }
+
+.btp-stat-data { display: flex; flex-direction: column; }
+.btp-stat-data .label { font-size: 11px; color: #8e8e93; font-weight: 600; text-transform: uppercase; }
+.btp-stat-data .value { font-size: 16px; font-weight: 700; color: #1c1c1e; }
+.btp-stat-data .money { color: #1c1c1e; font-size: 17px; }
+
+/* --- MODAL DETALLE CON MAPA --- */
+.btp-modal-overlay {
+  position: fixed; inset: 0; 
+  background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
+  z-index: 5000;
+  display: flex; align-items: center; justify-content: center;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.btp-modal-card {
+  background: #F2F2F7;
+  width: 90%; max-width: 450px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: popUp 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex; flex-direction: column;
+}
+
+/* Modal Header */
+.btp-modal-header {
+  background: white; padding: 20px;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.header-info h3 { margin: 0; font-size: 22px; font-weight: 700; color: #111; }
+.status-tag { 
+  display: inline-block; font-size: 12px; font-weight: 600; 
+  background: #e5e5ea; color: #8e8e93; padding: 4px 8px; border-radius: 6px; margin-top: 5px;
+}
+.status-tag.active { background: #e8f5e9; color: #2e7d32; }
+
+.close-btn {
+  background: #f2f2f7; border: none; width: 32px; height: 32px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: #555; cursor: pointer;
+}
+
+/* Modal Stats Row */
+.btp-modal-stats {
+  display: flex; gap: 10px; padding: 15px;
+}
+.modal-stat-box {
+  flex: 1; background: white; padding: 15px; border-radius: 16px;
+  display: flex; flex-direction: column; align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+.modal-stat-box .label { font-size: 11px; text-transform: uppercase; color: #8e8e93; font-weight: 600; }
+.modal-stat-box .val { font-size: 20px; font-weight: 700; color: #111; }
+.modal-stat-box.green .val { color: #34C759; }
+
+/* --- MAPA --- */
+.btp-map-section {
+  padding: 0 15px 20px 15px;
+  flex: 1; display: flex; flex-direction: column;
+}
+.map-title {
+  font-size: 13px; font-weight: 600; color: #666; 
+  margin-bottom: 10px; padding-left: 5px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.map-wrapper {
+  height: 250px; /* Altura fija para el mapa */
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  background: #e5e5ea; /* Fondo mientras carga */
+  position: relative;
+  z-index: 1; /* Para que Leaflet no se salga */
+}
+
+/* Leaflet Container Override (Importante) */
+.leaflet-container {
+  height: 100%; width: 100%;
+  font-family: inherit;
+}
+
+.no-map-data {
+  height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  color: #999; gap: 10px;
+}
+.no-map-data ion-icon { font-size: 40px; opacity: 0.5; }
+
+@keyframes popUp { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* ANIMACIONES */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse-green {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(52, 199, 89, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 199, 89, 0); }
+}
+
+
+/* Ajuste al wrapper para que el botón flote dentro */
+.map-wrapper {
+  position: relative; 
+  /* Asegura que el z-index interno funcione */
+}
+
+/* BOTÓN FLOTANTE SOBRE EL MAPA */
+.open-maps-btn {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: white;
+  color: #007AFF; /* Azul iOS */
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  z-index: 1000; /* Siempre encima del mapa */
+  transition: transform 0.2s;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+}
+
+.open-maps-btn:active {
+  transform: scale(0.95);
+  background: #f9f9f9;
+}

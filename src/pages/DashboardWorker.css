@@ -1,0 +1,212 @@
+/* IMPORT FUENTE */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* VARIABLES */
+:root {
+  --font-premium: 'Inter', -apple-system, sans-serif;
+  --bg-app: #F5F7FA;
+  --surface-white: #FFFFFF;
+  --glass-black: rgba(18, 18, 20, 0.9);
+  --shadow-card: 0 10px 30px -10px rgba(0,0,0,0.06);
+  --shadow-float: 0 20px 50px rgba(0,0,0,0.2);
+  --radius-lg: 28px;
+  --radius-md: 20px;
+}
+
+/* CONTAINER */
+.dw-container {
+  font-family: var(--font-premium);
+  background: var(--bg-app);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  color: #1a1a1a;
+}
+
+/* HEADER */
+.dw-header {
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: max(20px, env(safe-area-inset-top));
+}
+
+.dw-brand { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; color: #111; }
+
+.dw-btn-icon {
+  width: 44px; height: 44px; border-radius: 14px;
+  background: var(--surface-white); border: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; color: #111;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  cursor: pointer;
+}
+
+/* MAIN CONTENT */
+.dw-content {
+  flex: 1; padding: 0 24px;
+  padding-bottom: 140px; 
+  overflow-y: auto;
+}
+
+.welcome-block { margin: 10px 0 25px 0; }
+.welcome-sub {
+  display: block; font-size: 14px; font-weight: 600; color: #94949d;
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
+}
+.welcome-title {
+  font-size: 32px; font-weight: 800; color: #111; margin: 0;
+  letter-spacing: -1px; line-height: 1.1;
+}
+
+.component-wrapper { margin-bottom: 25px; border-radius: var(--radius-md); }
+
+/* PREMIUM GRID */
+.premium-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 10px;
+}
+
+.premium-card {
+  background: var(--surface-white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  display: flex; flex-direction: column; justify-content: space-between;
+  height: 160px; cursor: pointer; position: relative;
+  transition: transform 0.2s;
+}
+.premium-card:active { transform: scale(0.96); }
+
+/* Variaciones de tarjetas */
+.card-clock { background: linear-gradient(180deg, #FFFFFF 0%, #FFF4E5 100%); }
+.card-tasks { background: linear-gradient(180deg, #FFFFFF 0%, #F5F0FF 100%); }
+
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+
+.card-icon-bubble {
+  width: 50px; height: 50px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 15px; color: white;
+}
+.bubble-orange { background: linear-gradient(135deg, #FF9500, #FF3B30); }
+.bubble-purple { background: linear-gradient(135deg, #AF52DE, #5856D6); }
+
+.card-arrow { font-size: 20px; color: #ccc; }
+
+.card-meta h3 { font-size: 18px; font-weight: 700; margin: 0 0 4px 0; color: #111; }
+.card-meta p { font-size: 14px; color: #888; font-weight: 500; margin: 0; }
+
+/* DOCK FLOTANTE */
+.glass-dock {
+  position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
+  background: var(--glass-black);
+  backdrop-filter: blur(25px);
+  border-radius: 40px;
+  padding: 12px 30px;
+  display: flex; align-items: center; gap: 30px;
+  box-shadow: var(--shadow-float);
+  z-index: 100;
+}
+
+.dock-icon {
+  color: rgba(255,255,255,0.5); font-size: 24px;
+  cursor: pointer; transition: all 0.3s;
+}
+.dock-icon.active { color: white; transform: translateY(-3px); }
+
+/* FAB Central en el Dock */
+.dock-fab-main {
+  background: white; color: black;
+  width: 52px; height: 52px; border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; margin: -35px 5px 0 5px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  cursor: pointer; transition: transform 0.2s;
+}
+.dock-fab-main:active { transform: scale(0.9); }
+
+/* MODALES */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(5px); z-index: 200;
+  display: flex; align-items: flex-end;
+}
+.modal-overlay.center { align-items: center; justify-content: center; }
+
+.modal-sheet {
+  background: var(--surface-white); width: 100%;
+  border-radius: 32px 32px 0 0; padding: 30px; padding-bottom: 50px;
+  animation: slideUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.modal-full {
+  background: var(--bg-app); width: 100%; height: 92vh;
+  border-radius: 32px 32px 0 0; display: flex; flex-direction: column;
+  animation: slideUp 0.3s; overflow: hidden;
+}
+
+.sheet-handle {
+  width: 40px; height: 5px; background: #e0e0e0;
+  border-radius: 4px; margin: 0 auto 25px auto;
+}
+
+.settings-item {
+  display: flex; align-items: center; gap: 16px; padding: 18px;
+  border-bottom: 1px solid #f0f0f0; font-size: 17px; font-weight: 500;
+  cursor: pointer;
+}
+.settings-item.danger { color: #FF3B30; border-bottom: none; }
+
+/* Confirm Card */
+.confirm-card {
+  background: white; padding: 30px; border-radius: 24px;
+  text-align: center; width: 280px;
+}
+.confirm-actions { display: flex; gap: 10px; margin-top: 20px; }
+.btn-cancel, .btn-confirm {
+  flex: 1; padding: 12px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer;
+}
+.btn-cancel { background: #f5f5f7; }
+.btn-confirm { background: #111; color: white; }
+
+/* Tasks Styles */
+.tasks-header {
+  padding: 24px; background: white;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.tasks-header h2 { margin: 0; font-size: 22px; font-weight: 800; }
+.close-icon { font-size: 24px; color: #999; }
+
+.tasks-body { padding: 20px; overflow-y: auto; flex: 1; }
+
+.empty-tasks {
+  text-align: center; color: #ccc; margin-top: 60px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.empty-tasks ion-icon { font-size: 40px; }
+
+.task-pill {
+  background: white; padding: 16px; border-radius: 16px;
+  margin-bottom: 12px; display: flex; justify-content: space-between;
+  align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  font-weight: 500;
+}
+.del-btn { background: none; border: none; color: #ff3b30; font-size: 20px; }
+
+.task-input-bar {
+  background: white; padding: 20px; display: flex; gap: 12px;
+}
+.task-input-bar input {
+  flex: 1; background: #f2f2f7; border: none; padding: 14px;
+  border-radius: 14px; font-size: 16px; outline: none;
+}
+.add-btn {
+  background: #111; color: white; width: 48px; height: 48px;
+  border-radius: 14px; border: none; font-size: 24px;
+}
+
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes fadeEnter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.fade-enter { animation: fadeEnter 0.4s ease-out; }

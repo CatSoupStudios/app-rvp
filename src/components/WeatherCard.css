@@ -1,0 +1,161 @@
+/* --- BASE CARD --- */
+.wc-card {
+  width: 100%;
+  border-radius: 28px; /* Curva suave premium */
+  position: relative;
+  overflow: hidden;
+  color: white;
+  font-family: var(--font-premium, -apple-system, sans-serif); /* Usa la fuente global o fallback */
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12), 0 5px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wc-card:active { transform: scale(0.98); }
+
+/* --- LAYOUT INTERNO --- */
+.wc-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 28px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Columna Izquierda (Texto) */
+.wc-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wc-city {
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.9;
+  display: flex; align-items: center; gap: 4px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.wc-loc-icon { font-size: 14px; }
+
+.wc-temp-wrapper { display: flex; align-items: flex-start; }
+.wc-temp-main {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -2px;
+  text-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.wc-desc {
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: capitalize;
+  opacity: 0.95;
+  margin-top: 4px;
+  display: flex; flex-direction: column;
+}
+.wc-hl {
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* Columna Derecha (Icono) */
+.wc-icon-col {
+  width: 90px; height: 90px;
+  display: flex; align-items: center; justify-content: center;
+  /* Efecto de luz detrás del icono */
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+}
+
+.wc-icon-img {
+  width: 140%; /* Hacemos el icono un poco más grande que el contenedor para que "salga" */
+  height: 140%;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+  animation: floatIcon 6s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* --- ESTADOS VISUALES (Tus colores mejorados) --- */
+
+/* 1. DÍA FRESCO (Azul Intenso Apple) */
+.wc-day-clear {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* 2. DÍA NUBLADO (Gris Metálico Elegante) */
+.wc-day-cloudy {
+  background: linear-gradient(135deg, #93a5cf 0%, #e4efe9 100%);
+  color: #333; /* Texto oscuro para contraste en gris claro */
+}
+/* Ajuste de sombras para el modo claro */
+.wc-day-cloudy .wc-temp-main, .wc-day-cloudy .wc-city { text-shadow: none; }
+.wc-day-cloudy .wc-icon-col { background: radial-gradient(circle, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 70%); }
+
+
+/* 3. 🔥 DÍA CALUROSO (Sunset Premium) 🔥 */
+.wc-day-hot {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); /* Opción pastel */
+  background: linear-gradient(135deg, #fbab7e 0%, #f7ce68 100%); /* Opción Golden Hour */
+}
+
+/* 4. LLUVIA (Deep Ocean) */
+.wc-rain {
+  background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+}
+
+/* 5. NOCHE (Deep Space) */
+.wc-night-clear, .wc-night-cloudy {
+  background: linear-gradient(135deg, #141e30 0%, #243b55 100%);
+}
+
+/* --- EFECTOS DE FONDO (ESTRELLAS REFINADAS) --- */
+.wc-bg-effect {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+}
+
+.wc-night-clear .wc-bg-effect::before,
+.wc-night-cloudy .wc-bg-effect::before {
+  content: ''; position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%;
+  box-shadow: 
+    10px 10px white, 40px 50px white, 90px 20px white, 150px 80px white, 
+    200px 30px white, 250px 90px white, 20px 120px white, 300px 60px white;
+  opacity: 0.4;
+  animation: twinkle 4s infinite alternate;
+}
+.wc-night-clear .wc-bg-effect::before { opacity: 0.8; } /* Más brillo si está despejado */
+
+@keyframes twinkle { from { opacity: 0.3; } to { opacity: 0.8; } }
+
+/* --- LOADING SKELETON (Elegancia incluso esperando) --- */
+.wc-loading {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+.wc-skeleton-row { display: flex; align-items: center; justify-content: space-between; margin-top: 15px; }
+.wc-skeleton-line { height: 10px; background: #f0f0f0; border-radius: 5px; width: 60%; }
+.wc-skeleton-line.title { width: 40%; margin-bottom: 10px; }
+.wc-skeleton-line.big { height: 40px; width: 30%; }
+.wc-skeleton-circle { width: 60px; height: 60px; border-radius: 50%; background: #f0f0f0; }
+
+.wc-loading * { animation: pulse 1.5s infinite ease-in-out; }
+@keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+
+.wc-error {
+  background: linear-gradient(135deg, #8e9eab, #eef2f3);
+  color: #555; align-items: center; font-weight: 600;
+}
